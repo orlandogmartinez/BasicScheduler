@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, conttrollers: {
+      sessions: 'users/sessions'
+  }
+
+  devise_scope :user do
+    unauthenticated :user do
+      root 'users/sessions#new', as: :unauthenticated_root
+    end
+
+    authenticated :user do
+      root 'users#index', as: :authenticated_root
+    end
+
+    authenticate :user do
+
+    end
+
+  end
+
 end
