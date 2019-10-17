@@ -58,3 +58,4 @@ gem 'exception_notification'
 gem 'slack-notifier'
 gem 'rubocop'
 gem 'devise'
+gem "rolify"
