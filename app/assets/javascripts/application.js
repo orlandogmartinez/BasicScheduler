@@ -12,5 +12,12 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require_tree .
+//= require jquery/jquery
+//= require perfect-scrollbar/perfect-scrollbar
+//= require boostrap/bootstrap.bundle
+//= require app
+
+$(document).ready(function(){
+    //- initialize the javascript
+    App.init();
+});
