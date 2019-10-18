@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     end
 
     authenticate :user do
-
+      resources :users do
+        resources :events, only: [:index]
+      end
+      resources :events
     end
 
   end
