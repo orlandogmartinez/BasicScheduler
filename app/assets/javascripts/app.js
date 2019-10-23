@@ -159,7 +159,7 @@ var App = (function () {
         destroyScroller(ps_am_scroller);
       }
       if (typeof ps_am_scroller === "undefined" || !ps_am_scroller || !ps_am_scroller.nodeName) {
-        ps_am_scroller = initScroller(scroller);
+        //ps_am_scroller = initScroller(scroller);
       }
 
       //Check if event is click or hover

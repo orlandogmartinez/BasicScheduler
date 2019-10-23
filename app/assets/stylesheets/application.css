@@ -13,5 +13,7 @@
  *= require stroke-7/style
  *= require perfect-scrollbar/perfect-scrollbar
  *= require app
+ *= require toastr
+ *= require custom
  *= require_self
  */

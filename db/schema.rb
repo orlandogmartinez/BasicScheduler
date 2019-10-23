@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_214355) do
+ActiveRecord::Schema.define(version: 2019_10_22_200456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_214355) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: true, null: false
+    t.string "text_color", default: "#FFFFFF", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -29,12 +31,14 @@ ActiveRecord::Schema.define(version: 2019_10_17_214355) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.json "additional_attributes"
-    t.bigint "user_id"
+    t.bigint "created_by_id"
+    t.bigint "assigned_to_id"
     t.bigint "event_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_events_on_assigned_to_id"
+    t.index ["created_by_id"], name: "index_events_on_created_by_id"
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
-    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -45,15 +49,6 @@ ActiveRecord::Schema.define(version: 2019_10_17_214355) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
-  end
-
-  create_table "user_events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_user_events_on_event_id"
-    t.index ["user_id"], name: "index_user_events_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,7 +75,4 @@ ActiveRecord::Schema.define(version: 2019_10_17_214355) do
   end
 
   add_foreign_key "events", "event_types"
-  add_foreign_key "events", "users"
-  add_foreign_key "user_events", "events"
-  add_foreign_key "user_events", "users"
 end

@@ -13,8 +13,9 @@ Rails.application.routes.draw do
     end
 
     authenticate :user do
+      resources :event_types
       resources :users do
-        resources :events, only: [:index]
+        resources :events, only: [:index], controller: 'users/events'
       end
       resources :events
     end

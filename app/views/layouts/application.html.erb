@@ -2,18 +2,20 @@
 <html>
   <head>
     <title>Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :head %>
   </head>
   <body>
   <div class="am-wrapper">
     <nav class="navbar navbar-expand-md fixed-top am-top-header">
       <div class="container-fluid">
         <div class="am-navbar-header">
-          <div class="page-title"><span>Dashboard</span></div><a class="am-toggle-left-sidebar navbar-toggle collapsed" href="#"><span class="icon-bar"><span></span><span></span><span></span></span></a><a class="navbar-brand" href="index.html"></a>
+          <div class="page-title"><span><%= yield :page_title %></span></div><a class="am-toggle-left-sidebar navbar-toggle collapsed" href="#"><span class="icon-bar"><span></span><span></span><span></span></span></a><a class="navbar-brand" href="index.html"></a>
         </div>
         <button class="navbar-toggler hidden-md-up collapsed" data-toggle="collapse" data-target="#am-navbar-collapse"><span class="icon s7-angle-down"></span></button>
         <div class="collapse navbar-collapse" id="am-navbar-collapse">
@@ -29,9 +31,11 @@
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav am-top-menu">
+          <ul class="nav navbar-nav am-top-menu invisible-sm">
+            <li>
+              <span class="text-white"><h4><%= yield :page_title %></h4></span>
+            </li>
           </ul>
-
         </div>
       </div>
     </nav>
@@ -39,11 +43,11 @@
       <div class="content">
         <div class="am-logo"></div>
         <ul class="sidebar-elements">
-          <li><a href="#"><i class="icon s7-date"></i><span>Agenda</span></a>
+          <li><a href="<%= events_path %>"><i class="icon s7-date"></i><span>Agenda</span></a>
           </li>
           <li class="parent"><a href="#"><i class="icon s7-settings"></i><span>Administración</span></a>
             <ul class="sub-menu">
-              <li><a href="#">Tipos de eventos</a>
+              <li><a href="<%= event_types_path %>">Tipos de eventos</a>
               </li>
             </ul>
           </li>
@@ -56,5 +60,6 @@
       </div>
     </div>
   </div>
+  <%= toastr_notifications %>
   </body>
 </html>

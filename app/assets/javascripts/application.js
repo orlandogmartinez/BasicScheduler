@@ -15,6 +15,7 @@
 //= require jquery/jquery
 //= require perfect-scrollbar/perfect-scrollbar
 //= require boostrap/bootstrap.bundle
+//= require toastr
 //= require app
 
 $(document).ready(function(){
